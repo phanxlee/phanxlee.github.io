@@ -4,12 +4,12 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://www.phanx.com/"/>
   <updated>2017-05-17T14:26:52.183Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://www.phanx.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>Phanx Lee</name>
     
   </author>
   
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Phanx Blog</title>
-    <link href="http://yoursite.com/2017/05/17/home-page/"/>
-    <id>http://yoursite.com/2017/05/17/home-page/</id>
+    <link href="http://www.phanx.com/2017/05/17/home-page/"/>
+    <id>http://www.phanx.com/2017/05/17/home-page/</id>
     <published>2017-05-17T13:51:44.088Z</published>
     <updated>2017-05-17T14:26:52.183Z</updated>
     
