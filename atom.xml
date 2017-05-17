@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-05-17T14:26:52.183Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Phanx Blog</title>
+    <link href="http://yoursite.com/2017/05/17/home-page/"/>
+    <id>http://yoursite.com/2017/05/17/home-page/</id>
+    <published>2017-05-17T13:51:44.088Z</published>
+    <updated>2017-05-17T14:26:52.183Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。</p>
+<p>phanx 的博客空间，请访问这个地址 <a href="http://blog.chinaunix.net/uid/7549563.html" target="_blank" rel="external">http://phanx.blog.chinaunix.net</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。&lt;/p&gt;
+&lt;p&gt;phanx 的博客空间，请访问这个地址 &lt;a href=&quot;http://blog.chinaunix.net/uid/7549563.html&quot; target=&quot;_bl
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
