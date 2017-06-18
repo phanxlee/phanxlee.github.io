@@ -4,23 +4,24 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Phanx Blog | Phanx&#39;s Blog</title>
+    <title>用 lsyncd 来替代 inotify-rsync 进行文件同步 | Phanx&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Phanx Lee">
     
 
     
-    <meta name="description" content="正在进行Blog搬家，这里看到的Blog暂时不完整。由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。 phanx 的博客空间，请访问这个地址 http://phanx.blog.chinaunix.net">
+    <meta name="description" content="##################### phanx.com ##################### Author:   phanx Updated:  2017-6-18转载请保留作者信息###################################################两个主机有目录需要内容一样，NAS上的NFS没法用，直接export NFS也不太合适，上集群文件系统">
+<meta name="keywords" content="lsyncd inotify rsync">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Phanx Blog">
-<meta property="og:url" content="http://www.phanx.com/2017/05/17/home-page/index.html">
+<meta property="og:title" content="用 lsyncd 来替代 inotify-rsync 进行文件同步">
+<meta property="og:url" content="http://www.phanx.com/2017/06/18/use-lsyncd-to-replace-inotify-rsync/index.html">
 <meta property="og:site_name" content="Phanx&#39;s Blog">
-<meta property="og:description" content="正在进行Blog搬家，这里看到的Blog暂时不完整。由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。 phanx 的博客空间，请访问这个地址 http://phanx.blog.chinaunix.net">
-<meta property="og:updated_time" content="2017-06-18T16:00:44.376Z">
+<meta property="og:description" content="##################### phanx.com ##################### Author:   phanx Updated:  2017-6-18转载请保留作者信息###################################################两个主机有目录需要内容一样，NAS上的NFS没法用，直接export NFS也不太合适，上集群文件系统">
+<meta property="og:updated_time" content="2017-06-18T15:58:24.537Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Phanx Blog">
-<meta name="twitter:description" content="正在进行Blog搬家，这里看到的Blog暂时不完整。由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。 phanx 的博客空间，请访问这个地址 http://phanx.blog.chinaunix.net">
+<meta name="twitter:title" content="用 lsyncd 来替代 inotify-rsync 进行文件同步">
+<meta name="twitter:description" content="##################### phanx.com ##################### Author:   phanx Updated:  2017-6-18转载请保留作者信息###################################################两个主机有目录需要内容一样，NAS上的NFS没法用，直接export NFS也不太合适，上集群文件系统">
 
     
     <link rel="alternative" href="/atom.xml" title="Phanx&#39;s Blog" type="application/atom+xml">
@@ -80,14 +81,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/05/17/home-page/" title="Phanx Blog" itemprop="url">Phanx Blog</a>
+      <a href="/2017/06/18/use-lsyncd-to-replace-inotify-rsync/" title="用 lsyncd 来替代 inotify-rsync 进行文件同步" itemprop="url">用 lsyncd 来替代 inotify-rsync 进行文件同步</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Phanx Lee" target="_blank" itemprop="author">Phanx Lee</a>
 		
   <p class="article-time">
-    <time datetime="2017-05-17T13:51:44.088Z" itemprop="datePublished"> Published 2017-05-17</time>
+    <time datetime="2017-06-18T12:43:21.000Z" itemprop="datePublished"> Published 2017-06-18</time>
     
   </p>
 </header>
@@ -96,17 +97,20 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正在进行Blog搬家，这里看到的Blog暂时不完整。"><span class="toc-number">1.</span> <span class="toc-text">正在进行Blog搬家，这里看到的Blog暂时不完整。</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="正在进行Blog搬家，这里看到的Blog暂时不完整。"><a href="#正在进行Blog搬家，这里看到的Blog暂时不完整。" class="headerlink" title="正在进行Blog搬家，这里看到的Blog暂时不完整。"></a>正在进行Blog搬家，这里看到的Blog暂时不完整。</h2><p>由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。</p>
-<p>phanx 的博客空间，请访问这个地址 <a href="http://blog.chinaunix.net/uid/7549563.html" target="_blank" rel="external">http://phanx.blog.chinaunix.net</a></p>
-  
+		<font face="微软雅黑"><br><br>##################### phanx.com #####################<br> Author:   phanx<br> Updated:  2017-6-18<br>转载请保留作者信息<br>###################################################<br><br>两个主机有目录需要内容一样，NAS上的NFS没法用，直接export NFS也不太合适，上集群文件系统又有点过了，于是还是考虑用rsync来同步。<br>考虑到同步要求要“实时”，所以需要用inotify-tools来及时触发rsync的同步。<br><br>网上inotify + rsync的教程很多，但是确实都有些毛病。想用这个方案的同学请参考 <a href="http://www.cnblogs.com/ginvip/p/6430986.html" title="琴酒网络" target="_blank" rel="external">真正的inotify+rsync实时同步 彻底告别同步慢</a><br><br>后来又研究了一下，决定用lsyncd + rsync来实现。<br><br><br></font>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/lsyncd-inotify-rsync/">lsyncd inotify rsync</a>
+  </div>
 
 </div>
 
@@ -114,7 +118,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://www.phanx.com/2017/05/17/home-page/" data-title="Phanx Blog | Phanx&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://www.phanx.com/2017/06/18/use-lsyncd-to-replace-inotify-rsync/" data-title="用 lsyncd 来替代 inotify-rsync 进行文件同步 | Phanx&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -127,19 +131,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/06/18/use-lsyncd-to-replace-inotify-rsync/" title="用 lsyncd 来替代 inotify-rsync 进行文件同步">
-  <strong>上一篇：</strong><br/>
-  <span>
-  用 lsyncd 来替代 inotify-rsync 进行文件同步</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2011/05/08/use-device-mapper-multipath-on-openfiler/"  title="在Openfiler中使用Device Mapper Multipath">
+<a href="/2017/05/17/home-page/"  title="Phanx Blog">
  <strong>下一篇：</strong><br/> 
- <span>在Openfiler中使用Device Mapper Multipath
+ <span>Phanx Blog
 </span>
 </a>
 </div>
@@ -155,7 +151,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正在进行Blog搬家，这里看到的Blog暂时不完整。"><span class="toc-number">1.</span> <span class="toc-text">正在进行Blog搬家，这里看到的Blog暂时不完整。</span></a></li></ol>
+ 
  
   </div>
 

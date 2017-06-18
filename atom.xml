@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.phanx.com/"/>
-  <updated>2017-05-17T14:26:52.183Z</updated>
+  <updated>2017-06-18T15:58:24.537Z</updated>
   <id>http://www.phanx.com/</id>
   
   <author>
@@ -16,23 +16,62 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>用 lsyncd 来替代 inotify-rsync 进行文件同步</title>
+    <link href="http://www.phanx.com/2017/06/18/use-lsyncd-to-replace-inotify-rsync/"/>
+    <id>http://www.phanx.com/2017/06/18/use-lsyncd-to-replace-inotify-rsync/</id>
+    <published>2017-06-18T12:43:21.000Z</published>
+    <updated>2017-06-18T15:58:24.537Z</updated>
+    
+    <content type="html"><![CDATA[<font face="微软雅黑"><br><br>##################### phanx.com #####################<br> Author:   phanx<br> Updated:  2017-6-18<br>转载请保留作者信息<br>###################################################<br><br>两个主机有目录需要内容一样，NAS上的NFS没法用，直接export NFS也不太合适，上集群文件系统又有点过了，于是还是考虑用rsync来同步。<br>考虑到同步要求要“实时”，所以需要用inotify-tools来及时触发rsync的同步。<br><br>网上inotify + rsync的教程很多，但是确实都有些毛病。想用这个方案的同学请参考 <a href="http://www.cnblogs.com/ginvip/p/6430986.html" title="琴酒网络" target="_blank" rel="external">真正的inotify+rsync实时同步 彻底告别同步慢</a><br><br>后来又研究了一下，决定用lsyncd + rsync来实现。<br><br><br></font>]]></content>
+    
+    <summary type="html">
+    
+      &lt;font face=&quot;微软雅黑&quot;&gt;&lt;br&gt;&lt;br&gt;##################### phanx.com #####################&lt;br&gt; Author:   phanx&lt;br&gt; Updated:  2017-6-18&lt;br&gt;转载请保留作者信息&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="lsyncd inotify rsync" scheme="http://www.phanx.com/tags/lsyncd-inotify-rsync/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Phanx Blog</title>
     <link href="http://www.phanx.com/2017/05/17/home-page/"/>
     <id>http://www.phanx.com/2017/05/17/home-page/</id>
     <published>2017-05-17T13:51:44.088Z</published>
-    <updated>2017-05-17T14:26:52.183Z</updated>
+    <updated>2017-06-18T16:00:44.376Z</updated>
     
-    <content type="html"><![CDATA[<p>由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。</p>
+    <content type="html"><![CDATA[<h2 id="正在进行Blog搬家，这里看到的Blog暂时不完整。"><a href="#正在进行Blog搬家，这里看到的Blog暂时不完整。" class="headerlink" title="正在进行Blog搬家，这里看到的Blog暂时不完整。"></a>正在进行Blog搬家，这里看到的Blog暂时不完整。</h2><p>由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。</p>
 <p>phanx 的博客空间，请访问这个地址 <a href="http://blog.chinaunix.net/uid/7549563.html" target="_blank" rel="external">http://phanx.blog.chinaunix.net</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;由于Chinaunix的Blog主机不支持301跳转，所以只有麻烦大家访问的时候多点一下。&lt;/p&gt;
-&lt;p&gt;phanx 的博客空间，请访问这个地址 &lt;a href=&quot;http://blog.chinaunix.net/uid/7549563.html&quot; target=&quot;_bl
+      &lt;h2 id=&quot;正在进行Blog搬家，这里看到的Blog暂时不完整。&quot;&gt;&lt;a href=&quot;#正在进行Blog搬家，这里看到的Blog暂时不完整。&quot; class=&quot;headerlink&quot; title=&quot;正在进行Blog搬家，这里看到的Blog暂时不完整。&quot;&gt;&lt;/a&gt;正在进行Blog
     
     </summary>
     
+    
+  </entry>
+  
+  <entry>
+    <title>在Openfiler中使用Device Mapper Multipath</title>
+    <link href="http://www.phanx.com/2011/05/08/use-device-mapper-multipath-on-openfiler/"/>
+    <id>http://www.phanx.com/2011/05/08/use-device-mapper-multipath-on-openfiler/</id>
+    <published>2011-05-08T12:48:44.000Z</published>
+    <updated>2017-06-18T14:36:27.038Z</updated>
+    
+    <content type="html"><![CDATA[<font face="微软雅黑"><br><br>##################### phanx.com #####################<br> Author:   phanx<br> Updated:  2011-5-8<br>转载请保留作者信息<br>###################################################<br><br><br>在使用Openfiler连接EMC存储的时候，由于Openfiler是基于rPath Linux版本的，EMC的PowerPath没有对rPath提供支持，所以无法使用。<br>但是，在linux发行版中，一般都自带了Device Mapper Multipath，可以采用dm-mutipath来替代PowerPath提供的多路径功能。<br><br>首先建立一个/etc/multipath.conf文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">defaults &#123;</div><div class="line">    user_friendly_names yes</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br>然后启动multpathd服务，加载dm_multipath模块，这样就可以看到多路径聚合后的psudo device了。<br><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]<span class="comment"># chkconfig --level 345 multipathd on</span></div><div class="line">[root@localhost ~]<span class="comment"># service multipathd start</span></div><div class="line">[root@localhost ~]<span class="comment"># modprobe dm_multipath</span></div><div class="line">[root@localhost ~]<span class="comment"># service multipathd restart</span></div><div class="line">[root@localhost ~]<span class="comment"># lsmod | grep multi</span></div><div class="line">dm_multipath           17476  3 dm_round_robin</div><div class="line">dm_mod                 76610  16 dm_multipath,dm_mirror,dm_log</div><div class="line">[root@localhost ~]<span class="comment"># multipath</span></div><div class="line"></div><div class="line">[root@localhost ~]<span class="comment"># ll /dev/mapper/</span></div><div class="line">total 0</div><div class="line">crw-rw---- 1 root </div><div class="line">root  10, 57 2011-05-07 00:46 control</div><div class="line">brw-rw---- 1 root disk 253,  0 2011-05-07 00:46 mpathb</div><div class="line">brw-rw---- 1 root disk 253,  1 2011-05-07 00:46 mpathc</div><div class="line"></div><div class="line">[root@localhost ~]<span class="comment"># multipath -ll</span></div><div class="line">mpathc (360060160ef501d003eed32b4c26be011) dm-1 DGC,RAID 10</div><div class="line">size=180G features=<span class="string">'1 queue_if_no_path'</span> hwhandler=<span class="string">'1 emc'</span> wp=rw</div><div class="line">|-+- policy=<span class="string">'round-robin 0'</span> prio=1 status=active</div><div class="line">| |- 3:0:0:0 sdb 8:16  active ready running</div><div class="line">| `- 4:0:0:0 sdf 8:80  active ready running</div><div class="line">`-+- policy=<span class="string">'round-robin 0'</span> prio=0 status=enabled</div><div class="line">  |- 3:0:1:0 sdd 8:48  active ready running</div><div class="line">  `- 4:0:1:0 sdh 8:112 active ready running</div><div class="line">mpathb (360060160ef501d00a6ececc4c26be011) dm-0 DGC,RAID 10</div><div class="line">size=120G features=<span class="string">'1 queue_if_no_path'</span> hwhandler=<span class="string">'1 emc'</span> wp=rw</div><div class="line">|-+- policy=<span class="string">'round-robin 0'</span> prio=1 status=active</div><div class="line">| |- 3:0:0:1 sdc 8:32  active ready running</div><div class="line">| `- 4:0:0:1 sdg 8:96  active ready running</div><div class="line">`-+- policy=<span class="string">'round-robin 0'</span> prio=0 status=enabled</div><div class="line">  |- 3:0:1:1 sde 8:64  active ready running</div><div class="line">  `- 4:0:1:1 sdi 8:128 active ready running</div></pre></td></tr></table></figure><br><br>由于Openfiler的/opt/openfiler/sbin/list-disks.pl脚本不能识别Device Mapper的设备，所以无法直接在Web界面中通过Block Device创建PV和VG。但是可以通过在CLI下手工的创建。<br>使用fdisk对LUN划分区,直接创建一个主分区，类型为 8e 的Linux LVM。<br>完成后即可看到mpathbp1和mpathcp1两个设备了，再把这两个设备定义为PV，然后创建VG就可以<br>在Openfiler中使用了。<br><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@localhost ~]<span class="comment"># fdisk /dev/mapper/mpathb</span></div><div class="line">	</div><div class="line">[root@localhost ~]<span class="comment"># fdisk /dev/mapper/mpathc</span></div><div class="line">	</div><div class="line">[root@localhost ~]<span class="comment"># pvcreate /dev/mapper/mpathbp1</span></div><div class="line">[root@localhost ~]<span class="comment"># pvcreate /dev/mapper/mpathcp1</span></div><div class="line">	</div><div class="line">[root@localhost ~]<span class="comment"># vgcreate nasdatavg /dev/mapper/mpathbp1</span></div><div class="line">[root@localhost ~]<span class="comment"># vgcreate naslogvg /dev/mapper/mpathcp1</span></div></pre></td></tr></table></figure><br><br></font>]]></content>
+    
+    <summary type="html">
+    
+      &lt;font face=&quot;微软雅黑&quot;&gt;&lt;br&gt;&lt;br&gt;##################### phanx.com #####################&lt;br&gt; Author:   phanx&lt;br&gt; Updated:  2011-5-8&lt;br&gt;转载请保留作者信息&lt;br&gt;#
+    
+    </summary>
+    
+    
+      <category term="openfiler device-mapper multipath" scheme="http://www.phanx.com/tags/openfiler-device-mapper-multipath/"/>
     
   </entry>
   
